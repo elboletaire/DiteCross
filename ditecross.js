@@ -142,8 +142,10 @@ function DiteCross(Discord_Token, Telegram_Token) {
   this.Discord_manageMessage = function (userID, channelID, message) {
     this.CrossTable.forEach(function (current, index) {
       if (channelID === current['discord_channel_id'] && userID !== this.Discord_Bot.id) {
-        var ret = this.Discord_Bot.users[userID].username + '#' + this.Discord_Bot.channels[channelID].name + ': ' + message
-        this.Telegram_Bot.sendMessage(current['telegram_chat_id'], ret)
+        var ret = '*' + this.Discord_Bot.users[userID].username + '#' + this.Discord_Bot.channels[channelID].name + ':* \n\n' + message
+        this.Telegram_Bot.sendMessage(current['telegram_chat_id'], ret, {
+          parse_mode: 'Markdown'
+        })
       }
     }, this)
   }
@@ -287,7 +289,7 @@ function DiteCross(Discord_Token, Telegram_Token) {
   this.Telegram_manageMessage = function (message) {
     this.CrossTable.forEach(function (current, index) {
       if (message.chat.id === current['telegram_chat_id']) {
-        var ret = message.from.username + '@' + message.chat.title + ': ' + message.text
+        var ret = '**' + message.from.username + '@' + message.chat.title + ':** \n\n ' + message.text
         this.Discord_Bot.sendMessage({to: current['discord_channel_id'], message: ret})
       }
     }, this)
