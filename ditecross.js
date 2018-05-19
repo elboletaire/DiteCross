@@ -105,10 +105,11 @@ function DiteCross(Discord_Token, Telegram_Token) {
   this.Discord_processHandshake = function (userID, channelID, password) {
     var resp = false;
     this.Discord_handshakeRequests.forEach(function (current, index) {
+      const channel = this.Discord_Bot.channels[channelID]
       if (
-        current[1] === this.Discord_Bot.channels[channelID].name &&
-        this.Discord_Bot.channels[channelID].type === 'text' &&
-        current[0] === this.Discord_Bot.servers[this.Discord_Bot.channels[channelID].guild_id].name &&
+        current[1] === channel.name &&
+        channel.type === 0 &&
+        current[0] === this.Discord_Bot.servers[channel.guild_id].name &&
         !resp
       ) {
         if (password)
