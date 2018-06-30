@@ -94,11 +94,6 @@ function DiteCross(Discord_Token, Telegram_Token) {
         'https://github.com/corsaroquad/DiteCross'
       var to = channelID ? channelID : userID
       this.Discord_Bot.sendMessage({to: to, message: ret})
-    } else {
-      if (!channelID) {
-        var ret = 'Sorry, what did you say?'
-        this.Discord_Bot.sendMessage({to: userID, message: ret})
-      }
     }
   }
 
@@ -200,9 +195,6 @@ function DiteCross(Discord_Token, Telegram_Token) {
         'Developed by Giovanni Grieco - @corsaro\n' +
         '\nI\'m open source! :D\n' +
         'https://github.com/corsaroquad/DiteCross'
-      this.Telegram_Bot.sendMessage(message.chat.id, ret)
-    } else {
-      var ret = 'Sorry, what did you say?'
       this.Telegram_Bot.sendMessage(message.chat.id, ret)
     }
   }
